@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Dashboard | [Name]</title>
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#0B0B0B', card: '#161616', accent: '#00FF88' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Oswald', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-card:hover {
+            border-color: #00FF88;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white min-h-screen">
+
+
+
+
+    <nav class="border-b border-white/10 py-4 px-6 flex justify-between items-center">
+        <div class="text-xl font-heading font-bold italic" onclick="location.href='index.html'">FIT<span
+                class="text-accent">CORE</span></div>
+        <div class="flex items-center gap-4">
+            <span id="user-display-name" class="text-sm font-medium text-gray-400">Athlete</span>
+            <div
+                class="w-10 h-10 bg-accent rounded-full flex items-center justify-center text-dark font-bold cursor-pointer">
+                <i class="fa-slab fa-regular fa-user"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <header class="mb-10">
+            <h1 class="text-4xl font-heading font-bold uppercase italic">Welcome Back, <span id="greet-name"
+                    class="text-accent">Member</span></h1>
+            <p class="text-gray-500">Your current streak: <span id="streak-days" class="text-white">1 Day 🔥</span></p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="glass p-6 rounded-2xl stat-card">
+                <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Membership</p>
+                <h3 id="dash-plan" class="text-2xl font-heading font-bold uppercase">Elite Access</h3>
+                <p class="text-accent text-sm mt-2">Active until April 2026</p>
+            </div>
+            <div class="glass p-6 rounded-2xl stat-card">
+                <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Current BMI</p>
+                <h3 id="dash-bmi" class="text-2xl font-heading font-bold uppercase">--</h3>
+                <p class="text-gray-500 text-xs mt-2">Last updated today</p>
+            </div>
+        </div>
+
+        <h2 class="text-xl font-heading font-bold uppercase mb-6">Quick Actions</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <button onclick="openDiet()"
+                class="glass p-8 rounded-2xl flex flex-col items-center gap-3 hover:bg-accent hover:text-dark transition-all">
+                <i class="fas fa-apple-whole text-2xl"></i>
+                <span class="text-xs font-bold uppercase">Diet Plan</span>
+            </button>
+            <div id="dietModal"
+                class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+                <div class="glass p-8 rounded-[2.5rem] max-w-md w-full border-accent/20">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-3xl font-heading font-bold uppercase italic">Fuel <span
+                                class="text-accent">Strategy</span></h2>
+                        <button onclick="closeDiet()" class="text-gray-500 hover:text-white"><i
+                                class="fas fa-times text-xl"></i></button>
+                    </div>
+
+                    <div class="text-center mb-8">
+                        <p class="text-gray-400 text-xs uppercase tracking-[0.2em] mb-2">Recommended Daily Intake</p>
+                        <div class="text-5xl font-heading font-bold text-white"><span id="diet-calories">0</span> <span
+                                class="text-sm text-gray-500 italic">KCAL</span></div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                            <p class="text-[10px] text-gray-500 uppercase mb-1">Protein</p>
+                            <p id="diet-protein" class="text-accent font-bold">0g</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                            <p class="text-[10px] text-gray-500 uppercase mb-1">Carbs</p>
+                            <p id="diet-carbs" class="text-white font-bold">0g</p>
+                        </div>
+                        <div class="bg-white/5 p-4 rounded-2xl text-center border border-white/5">
+                            <p class="text-[10px] text-gray-500 uppercase mb-1">Fats</p>
+                            <p id="diet-fats" class="text-white font-bold">0g</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-widest text-accent mb-2">Elite Guidelines</h4>
+                        <div class="flex items-center gap-3 text-sm text-gray-300 bg-white/5 p-3 rounded-xl">
+                            <i class="fas fa-droplet text-blue-400"></i>
+                            <span>Hydration: 3.5L / Day</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-gray-300 bg-white/5 p-3 rounded-xl">
+                            <i class="fas fa-clock text-orange-400"></i>
+                            <span>Fast Window: 16:8 Protocol</span>
+                        </div>
+                    </div>
+
+                    <button onclick="closeDiet()"
+                        class="w-full mt-8 bg-white/5 border border-white/10 py-4 rounded-xl text-xs font-bold uppercase tracking-[0.2em] hover:bg-accent hover:text-dark transition-all">
+                        Update Profile Data
+                    </button>
+                </div>
+            </div>
+            <button onclick="logoutUser()"
+                class="glass p-8 rounded-2xl flex flex-col items-center gap-3 hover:bg-red-500 hover:text-white transition-all">
+                <i class="fas fa-sign-out-alt text-2xl"></i>
+                <span class="text-xs font-bold uppercase">Sign Out</span>
+            </button>
+        </div>
+    </main>
+
+    <script>
+        // Security check: If not a member, kick them back to home
+        if (!localStorage.getItem('isFitCoreMember')) {
+            window.location.href = "index.html";
+        }
+        // Pulling data from LocalStorage
+        const userName = localStorage.getItem('fitCoreName') || 'Athlete';
+        const userPlan = localStorage.getItem('fitCorePlan') || 'Elite Access';
+        const userBMI = localStorage.getItem('lastBMI') || '22.5';
+
+        document.getElementById('greet-name').innerText = userName;
+        document.getElementById('user-display-name').innerText = userName;
+        document.getElementById('dash-plan').innerText = userPlan;
+        document.getElementById('dash-bmi').innerText = userBMI;
+
+        function logoutUser() {
+            // Remove the specific items related to the user session
+            localStorage.removeItem('isFitCoreMember');
+            localStorage.removeItem('fitCoreName');
+            localStorage.removeItem('fitCorePlan');
+            localStorage.removeItem('lastBMI');
+
+            // Optional: Clear everything if you don't have other data
+            // localStorage.clear(); 
+
+            // Redirect to home page
+            window.location.href = 'index.html';
+        }
+
+        function openDiet() {
+            // 1. Get Data from LocalStorage
+            const bmi = parseFloat(localStorage.getItem('lastBMI')) || 22.5;
+            const plan = localStorage.getItem('fitCorePlan') || 'Elite';
+
+            // 2. Simple Performance Calculation Logic
+            // Base calories (very simplified for demo)
+            let baseCals = bmi * 100;
+
+            // Adjust based on Membership (Elite/Platinum gets higher performance targets)
+            if (plan.includes("Platinum")) baseCals += 500;
+            if (plan.includes("Elite")) baseCals += 200;
+
+            // Split Macros (Protein 30%, Carbs 40%, Fats 30%)
+            const protein = (baseCals * 0.30) / 4;
+            const carbs = (baseCals * 0.40) / 4;
+            const fats = (baseCals * 0.30) / 9;
+
+            // 3. Update the UI
+            document.getElementById('diet-calories').innerText = Math.round(baseCals);
+            document.getElementById('diet-protein').innerText = Math.round(protein) + 'g';
+            document.getElementById('diet-carbs').innerText = Math.round(carbs) + 'g';
+            document.getElementById('diet-fats').innerText = Math.round(fats) + 'g';
+
+            // Show Modal
+            document.getElementById('dietModal').classList.remove('hidden');
+        }
+
+        function closeDiet() {
+            document.getElementById('dietModal').classList.add('hidden');
+        }
+
+
+        function calculateStreak() {
+            const joinDateStr = localStorage.getItem('fitCoreJoinDate');
+            const streakElement = document.getElementById('streak-days');
+
+            if (!joinDateStr) {
+                // Fallback if the date wasn't set during registration
+                const today = new Date();
+                localStorage.setItem('fitCoreJoinDate', today.toISOString());
+                streakElement.innerText = "1 Day 🔥";
+                return;
+            }
+
+            const joinDate = new Date(joinDateStr);
+            const today = new Date();
+
+            // Calculate difference in milliseconds and convert to days
+            const diffTime = Math.abs(today - joinDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            // Update the UI
+            streakElement.innerText = `${diffDays} ${diffDays === 1 ? 'Day' : 'Days'} 🔥`;
+        }
+
+        // Call this function inside your window.onload
+        window.onload = () => {
+            // ... your existing display name/plan code ...
+            calculateStreak();
+        };
+    </script>
+</body>
+
+</html>

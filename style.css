@@ -1,0 +1,59 @@
+.glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.text-glow {
+    text-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+.btn-glow:hover {
+    box-shadow: 0 0 25px rgba(0, 255, 136, 0.4);
+}
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.text-glow-orange {
+    text-shadow: 0 0 20px rgba(45, 255, 192, 0.4);
+}
+.btn-glow-orange:hover {
+    box-shadow: 0 0 30px rgba(45, 255, 192, 0.5);
+}
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+.animate-marquee {
+    display: flex;
+    animation: marquee 20s linear infinite;
+}
+
+/* 1. For Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  width: 15px;               /* Width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;       /* Color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00FF88; /* Color of the scroll thumb */
+  border-radius: 20px;       /* Roundness of the scroll thumb */
+  border: 10px solid #000000; /* Creates padding around thumb */
+}
+
+/* 2. For Firefox */
+* {
+  scrollbar-width: auto;          /* "auto" or "thin" */
+  scrollbar-color: #00FF88 #000000; /* thumb color | track color */
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join [Name] | Elite Membership Registration</title>
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#0B0B0B', accent: '#00FF88' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Oswald', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-focus:focus {
+            border-color: #00FF88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white font-sans min-h-screen flex items-center justify-center p-6">
+
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent/10 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 blur-[120px] rounded-full">
+        </div>
+    </div>
+
+    <div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 glass rounded-[2.5rem] overflow-hidden shadow-2xl">
+
+        <div class="hidden lg:flex flex-col justify-between p-12 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=800&q=80');">
+            <div class="absolute inset-0 bg-dark/70"></div>
+            <div class="relative z-10">
+                <a href="index.html" class="text-2xl font-heading font-bold italic tracking-tighter">
+                    [NA<span class="text-accent">ME]</span>
+                </a>
+            </div>
+            <div class="relative z-10">
+                <h2 class="text-5xl font-heading font-bold uppercase leading-none mb-4">The Work <br>Starts <span
+                        class="text-accent italic">Now.</span></h2>
+                <p class="text-gray-300 text-sm">Join 10,000+ athletes who have redefined their physical limits with
+                    [Name].</p>
+            </div>
+        </div>
+
+        <div class="p-8 md:p-12">
+            <div class="mb-8">
+                <h1 class="text-3xl font-heading font-bold uppercase italic mb-2">Create Profile</h1>
+                <p class="text-gray-500 text-sm italic">"Commitment is the first step to greatness."</p>
+            </div>
+
+            <form id="joinForm" class="space-y-5">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">First
+                            Name</label>
+                        <input type="text" id="firstName" required
+                            class="w-full bg-white/5 border border-white/10 p-3 rounded-xl input-focus text-sm transition text-white outline-none"
+                            placeholder="John">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">Last
+                            Name</label>
+                        <input type="text" id="lastName" required
+                            class="w-full bg-white/5 border border-white/10 p-3 rounded-xl input-focus text-sm transition text-white outline-none"
+                            placeholder="Doe">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">Email
+                        Address</label>
+                    <input type="email" id="emailAddress" required
+                        class="w-full bg-white/5 border border-white/10 p-3 rounded-xl input-focus text-sm transition text-white outline-none"
+                        placeholder="john@example.com">
+                </div>
+
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">Mobile
+                        Number</label>
+                    <input type="tel" id="mobileNumber" required
+                        class="w-full bg-white/5 border border-white/10 p-3 rounded-xl input-focus text-sm transition text-white outline-none"
+                        placeholder="1234567890">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">Primary
+                            Goal</label>
+                        <select
+                            class="w-full bg-dark border border-white/10 p-3 rounded-xl input-focus text-sm transition text-gray-300">
+                            <option>Muscle Gain</option>
+                            <option>Fat Loss</option>
+                            <option>Endurance</option>
+                            <option>Flexibility</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 ml-1">Plan</label>
+                        <select id="planSelect"
+                            class="w-full bg-dark border border-white/10 p-3 rounded-xl input-focus text-sm transition text-gray-300">
+                            <option>Basic ($29)</option>
+                            <option selected>Elite ($59)</option>
+                            <option>Platinum ($99)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit"
+                        class="w-full bg-accent text-dark font-heading font-bold py-4 rounded-xl uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-[0_0_20_rgba(0,255,136,0.3)]">
+                        Confirm Registration
+                    </button>
+                </div>
+                <p class="text-center text-[10px] text-gray-500 mt-4">By joining, you agree to our Terms of Service
+                    and Privacy Policy.</p>
+            </form>
+
+            <div id="successMsg" class="hidden text-center py-10">
+                <div class="text-accent text-6xl mb-4"><i class="fas fa-check-circle"></i></div>
+                <h2 class="text-2xl font-heading font-bold uppercase mb-2">Welcome, <span id="display-name-here"
+                        class="text-accent">Athlete</span></h2>
+                <p class="text-gray-400 text-sm mb-6">Your profile is being processed. Check your email for your digital
+                    key.</p>
+                <a href="index.html"
+                    class="inline-block border border-accent text-accent px-8 py-2 rounded-full uppercase text-xs font-bold hover:bg-accent hover:text-dark transition">Back
+                    to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('joinForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // 1. Capture Data
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const first = document.getElementById('firstName').value.trim();
+            const last = document.getElementById('lastName').value.trim();
+            const mobile = document.getElementById('mobileNumber').value.trim();
+            const email = document.getElementById('emailAddress') ? document.getElementById('emailAddress').value.trim() : "N/A";
+            const plan = document.getElementById('planSelect') ? document.getElementById('planSelect').value : "Elite";
+            const fullName = `${first} ${last}`;
+
+            // 2. YOUR GOOGLE WEB APP URL (Paste your link here!)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyb6fZmbX7twwiX5yU9d1OENoE2dj64huvfbWr2pw_Ij9KiBYa2jBMQdwMZhwnzk2w/exec';
+
+            // 3. Button Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fas fa-sync fa-spin mr-2"></i> Syncing...`;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // 4. Save to LocalStorage (For user experience)
+            localStorage.setItem('fitCoreName', fullName);
+            localStorage.setItem('fitCoreMobile', mobile);
+            localStorage.setItem('isFitCoreMember', 'true');
+
+            // 5. Send to Google Sheets (Using FormData for e.parameter compatibility)
+            const formData = new FormData();
+            formData.append('name', fullName);   // Goes to Col B
+            formData.append('mobile', mobile);  // Goes to Col C
+            formData.append('email', email);    // Goes to Col D (The ID check)
+            formData.append('plan', plan);      // Goes to Col E
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            })
+                .then(() => {
+                    // 6. Handle the UI Progress Bar & Success
+                    let width = 0;
+                    const interval = setInterval(() => {
+                        width += 10;
+                        if (width >= 100) {
+                            clearInterval(interval);
+
+                            // Hide form and show success message
+                            document.getElementById('joinForm').classList.add('hidden');
+                            const successMsg = document.getElementById('successMsg');
+                            successMsg.classList.remove('hidden');
+
+                            // Show user name in success message
+                            const nameDisplay = document.getElementById('display-name-here');
+                            if (nameDisplay) nameDisplay.innerText = fullName;
+
+                            // Final Redirect after 2.5 seconds
+                            setTimeout(() => {
+                                window.location.href = "index.html";
+                            }, 2500);
+                        }
+                    }, 150);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = "Error. Try Again";
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Details | [Name] Fitness</title>
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { dark: '#0B0B0B', card: '#161616', accent: '#00FF88' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Oswald', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: #0B0B0B;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(0, 255, 136, 0.1), transparent);
+        }
+    </style>
+</head>
+
+<body class="hero-gradient min-h-screen bg-black">
+
+    <div class="max-w-4xl mx-auto px-6 py-12">
+        <div class="flex justify-between items-center mb-12">
+            <div class="text-2xl font-heading font-bold italic">FIT<span class="text-accent">CORE</span></div>
+            <a href="index.html" class="text-gray-400 hover:text-white transition"><i
+                    class="fas fa-arrow-left mr-2"></i> Dashboard</a>
+        </div>
+
+        <div class="glass rounded-3xl p-8 md:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-8 opacity-10 text-9 text-9xl">
+                <i id="plan-icon" class="fas fa-medal"></i>
+            </div>
+
+            <h1 class="text-sm font-heading tracking-[0.3em] text-accent uppercase mb-2">Member Access Confirmed</h1>
+            <h2 id="plan-title" class="text-5xl md:text-6xl font-heading font-bold uppercase italic mb-6">Plan Name</h2>
+
+            <p id="plan-description" class="text-gray-400 text-lg mb-8 max-w-xl">
+                Loading your exclusive benefits...
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-12" id="perks-container">
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <p class="text-gray-500 uppercase text-xs tracking-widest mb-1">Monthly Billing</p>
+                    <p id="plan-price" class="text-3xl font-heading font-bold text-white">$00<span
+                            class="text-sm text-gray-400">/mo</span></p>
+                </div>
+                <button onclick="applyNow()"
+                    class="bg-white text-dark font-heading font-bold px-12 py-4 rounded-full uppercase tracking-widest hover:bg-accent transition-all transform hover:scale-105">
+                    Apply Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Data Object (Keys are now lowercase for easier matching)
+            const planData = {
+                'basic': {
+                    name: 'Basic',
+                    price: '$29',
+                    description: 'The foundation of your fitness journey. Access to all standard equipment and locker rooms.',
+                    icon: 'fa-dumbbell',
+                    perks: ['24/7 Gym Access', 'Standard Locker Access', 'Mobile App Tracking', '1 Guest Pass/Mo']
+                },
+                'elite': {
+                    name: 'Elite',
+                    price: '$59',
+                    description: 'The most popular choice for dedicated athletes. Includes advanced classes and recovery tools.',
+                    icon: 'fa-bolt',
+                    perks: ['Everything in Basic', 'Unlimited HIIT Classes', 'Sauna & Steam Room', 'Personalized Workout Plan']
+                },
+                'platinum': {
+                    name: 'Platinum',
+                    price: '$99',
+                    description: 'The ultimate [Name] Fitness experience. Full-service training and nutrition for the professional mindset.',
+                    icon: 'fa-crown',
+                    perks: ['Everything in Elite', 'Private 1-on-1 Trainer', 'Nutrition & Meal Prep', 'Massage Therapy']
+                }
+            };
+
+            // 2. Logic to get the Plan from the URL
+            const params = new URLSearchParams(window.location.search);
+            // We convert the URL parameter to lowercase to match our object keys
+            const planKey = (params.get('plan') || 'basic').toLowerCase();
+            const data = planData[planKey];
+
+            // 3. Update the UI Elements
+            if (data) {
+                document.getElementById('plan-title').innerText = data.name;
+                document.getElementById('plan-price').innerHTML = `${data.price}<span class="text-sm text-gray-400">/mo</span>`;
+                document.getElementById('plan-description').innerText = data.description;
+                document.getElementById('plan-icon').className = `fas ${data.icon}`;
+
+                const perksContainer = document.getElementById('perks-container');
+                perksContainer.innerHTML = ''; // Clear loading text
+                data.perks.forEach(perk => {
+                    perksContainer.innerHTML += `
+                    <div class="flex items-center space-x-4 bg-white/5 p-4 rounded-xl border border-white/5">
+                        <i class="fas fa-check text-accent"></i>
+                        <span class="text-sm font-medium">${perk}</span>
+                    </div>
+                `;
+                });
+            } else {
+                // Fallback if the plan doesn't exist in our data
+                document.getElementById('plan-title').innerText = "Plan Not Found";
+            }
+        });
+
+        // 4. WhatsApp Application Function (Moved outside listener to be globally accessible)
+        function applyNow() {
+            const params = new URLSearchParams(window.location.search);
+            const plan = params.get('plan') || 'Basic';
+            const phone = "1234567890"; // Your actual WhatsApp number
+            const msg = `Hi [Name] Fitness! I want to join the ${plan} plan.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>

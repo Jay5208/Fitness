@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Name] Fitness | Build Strength. Burn Limits. Become Elite.</title>
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0B0B0B',
+                        card: '#1A1A1A',
+                        accent: '#00FF88', // Neon Green
+                    }
+
+                    ,
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    }
+
+                    ,
+                }
+            }
+        }
+
+    </script>
+
+</head>
+
+<body class="bg-dark text-white font-sans overflow-x-hidden">
+
+    <!-- alert msg -->
+
+    <div id="customAlert" class="fixed inset-0 z-[200] flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeEliteAlert()"></div>
+
+        <div class="glass relative p-8 rounded-3xl border border-accent/30 max-w-sm w-full text-center transform transition-all scale-95 opacity-0"
+            id="alertBox">
+
+            <button onclick="closeEliteAlert()"
+                class="absolute top-4 right-4 text-gray-500 hover:text-accent transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+
+            <div
+                class="w-16 h-16 bg-accent/10 border border-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-lock text-accent text-xl"></i>
+            </div>
+
+            <h3 class="text-2xl font-heading font-bold uppercase italic mb-2">Access Denied</h3>
+            <p id="alertMessage" class="text-gray-400 text-sm mb-6">
+                Elite access required. Please create your profile first!
+            </p>
+
+            <button onclick="window.location.href='joinNow.html'"
+                class="w-full bg-accent text-dark font-heading font-bold py-3 rounded-xl uppercase tracking-widest hover:scale-105 transition-all">
+                Join the Elite
+            </button>
+        </div>
+    </div>
+
+
+
+    <!-- Big screen -->
+    <nav
+        class="fixed w-full z-50 bg-dark/90 backdrop-blur-md py-4 px-6 md:px-12 flex justify-between items-center border-b border-white/5">
+        <div class="text-2xl font-heading font-bold tracking-tighter italic" onclick="location.href='Index.html'">
+            [NA<span class="text-accent">ME]</span>
+        </div>
+        <div class="hidden md:flex space-x-8 font-heading text-sm uppercase tracking-widest items-center">
+            <a href="#home" class="hover:text-accent transition">Home</a>
+            <a href="#programs" class="hover:text-accent transition">Programs</a>
+            <a href="#trainers" class="hover:text-accent transition">Trainers</a>
+            <a href="#pricing" class="hover:text-accent transition">Pricing</a>
+            <button onclick="checkAccess('dashboard.html')"
+                class="hover:text-accent transition uppercase tracking-widest">Dashboard</button>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button id="openBtn"
+                class="md:hidden text-accent text-2xl focus:outline-none hover:scale-110 transition-transform">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="joinNow.html"
+                class="bg-accent text-dark px-6 py-2 rounded-full font-heading font-bold text-sm btn-glow transition-all uppercase">Join
+                Now</a>
+        </div>
+    </nav>
+
+    <div id="mobileMenu"
+        class="fixed inset-0 bg-dark z-[90] flex flex-col items-center justify-center space-y-8 font-heading text-3xl uppercase tracking-tighter hidden opacity-0 transition-all duration-500">
+        <a href="#home" class="mobile-link hover:text-accent">Home</a>
+        <a href="#programs" class="mobile-link hover:text-accent">Programs</a>
+        <a href="#trainers" class="mobile-link hover:text-accent">Trainers</a>
+        <a href="#pricing" class="mobile-link hover:text-accent">Pricing</a>
+        <button onclick="checkAccess('dashboard.html')"
+            class="hover:text-accent transition uppercase tracking-widest">Dashboard</button>
+        <button id="closeMenu"
+            class="absolute top-10 right-10 text-accent text-4xl hover:scale-110 transition-transform">&times;</button>
+    </div>
+
+
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=2000"
+                class="w-full h-full object-cover opacity-40" alt="Athlete">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-dark/50"></div>
+        </div>
+
+        <div class="relative z-10 mt-14 mb-5 md:mb-10 text-center px-4 max-w-5xl">
+            <h1 class="font-heading text-6xl md:text-9xl font-bold uppercase leading-tight mb-6">
+                Build <span class="text-accent italic">Strength</span>.<br>
+                Burn Limits.
+            </h1>
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light">
+                Premium coaching and elite facilities designed for those who refuse to settle for average.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                <button
+                    class="w-full md:w-auto bg-accent text-dark px-10 py-4 rounded-xl font-heading font-bold text-lg btn-glow transform hover:scale-105 transition-all uppercase"
+                    onclick="location.href='joinNow.html'">Start
+                    Your Journey</button>
+                <a href="#programs"
+                    class="w-full md:w-auto glass px-10 py-4 rounded-xl font-heading font-bold text-lg hover:bg-white/10 transition-all uppercase text-center block md:inline-block">
+                    Explore Programs
+                </a>
+            </div>
+
+            <div class="grid grid-cols-3 gap-8 mt-2  pt-10 border-t border-white/10">
+                <div>
+                    <div class="text-3xl font-heading font-bold text-accent">10K+</div>
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Members</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-bold text-accent">500+</div>
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Transformations</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-heading font-bold text-accent">50+</div>
+                    <div class="text-xs uppercase tracking-widest text-gray-500">Elite Trainers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="py-24 px-6 md:px-12 bg-dark">
+        <div class="flex justify-between items-end mb-16">
+            <div>
+                <h2 class="text-accent font-heading uppercase tracking-tighter text-lg mb-2">// Training Programs</h2>
+                <h3 class="text-4xl md:text-6xl font-heading font-bold uppercase">Push Your <span
+                        class="italic">Potential</span></h3>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div
+                class="group relative overflow-hidden rounded-3xl h-[450px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)]">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                <div class="absolute bottom-0 p-8">
+                    <span
+                        class="text-xs bg-accent text-dark px-3 py-1 rounded-full font-bold uppercase mb-4 inline-block">Strength</span>
+                    <h4 class="text-3xl font-heading font-bold mb-2 uppercase italic">Muscle Gain</h4>
+                    <p class="text-gray-300 text-sm mb-6">High-volume hypertrophy training for elite aesthetics.</p>
+                    <p
+                        class="flex items-center text-accent font-heading uppercase tracking-widest text-sm group-hover:gap-4 transition-all">
+                        Join Now <i class="fas fa-arrow-right ml-2"></i>
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="group relative overflow-hidden rounded-3xl h-[450px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)]">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                <div class="absolute bottom-0 p-8">
+                    <span
+                        class="text-xs bg-accent text-dark px-3 py-1 rounded-full font-bold uppercase mb-4 inline-block">Cardio</span>
+                    <h4 class="text-3xl font-heading font-bold mb-2 uppercase italic">HIIT Mastery</h4>
+                    <p class="text-gray-300 text-sm mb-6">Explosive intervals to incinerate fat and boost endurance.</p>
+                    <p
+                        class="flex items-center text-accent font-heading uppercase tracking-widest text-sm group-hover:gap-4 transition-all">
+                        Join Now <i class="fas fa-arrow-right ml-2"></i>
+                    </p>
+                </div>
+            </div>
+
+            <div
+                class="group relative overflow-hidden rounded-3xl h-[450px] transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,255,136,0.2)]">
+                <img src="https://plus.unsplash.com/premium_photo-1664910806127-d52cb0e0d091?q=80"
+                    class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-60">
+                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                <div class="absolute bottom-0 p-8">
+                    <span
+                        class="text-xs bg-accent text-dark px-3 py-1 rounded-full font-bold uppercase mb-4 inline-block">Wellness</span>
+                    <h4 class="text-3xl font-heading font-bold mb-2 uppercase italic">Yoga & Flex</h4>
+                    <p class="text-gray-300 text-sm mb-6">Strategic recovery and mobility for peak performance.</p>
+                    <p
+                        class="flex items-center text-accent font-heading uppercase tracking-widest text-sm group-hover:gap-4 transition-all">
+                        Join Now <i class="fas fa-arrow-right ml-2"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="py-24 px-6 md:px-12 bg-[#080808]">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-6xl font-heading font-bold uppercase mb-4">Choose Your <span
+                    class="text-accent italic">Level</span></h2>
+            <p class="text-gray-500">Simple pricing for extraordinary results.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="glass p-10 rounded-[2rem] border-[#00FF88]/20 hover:border-[#00FF88]/30 transition group">
+                <h4 class="font-heading text-xl uppercase mb-2">Basic</h4>
+                <div class="text-5xl font-heading font-bold mb-8">$29<span
+                        class="text-lg text-gray-500 font-normal">/mo</span></div>
+                <ul class="space-y-4 mb-10 text-gray-400">
+                    <li><i class="fas fa-check text-accent mr-2"></i> Access to all gym floors</li>
+                    <li><i class="fas fa-check text-accent mr-2"></i> Basic workout plans</li>
+                    <li><i class="fas fa-check text-accent mr-2"></i> Locker room access</li>
+                </ul>
+                <button onclick="handlePurchase('Basic')"
+                    class="w-full py-4 border border-white/20 rounded-xl font-heading uppercase tracking-widest bg-[#00ff88] text-dark transition">
+                    Get Started
+                </button>
+            </div>
+
+            <div
+                class="bg-accent p-10 rounded-[2rem] text-dark relative transform md:-translate-y-4 shadow-[0_20px_50px_rgba(0,255,136,0.2)]">
+                <div
+                    class="absolute top-6 right-8 font-heading uppercase font-bold text-xs bg-dark text-white px-3 py-1 rounded-full">
+                    Most Popular</div>
+                <h4 class="font-heading text-xl uppercase mb-2">Elite</h4>
+                <div class="text-5xl font-heading font-bold mb-8">$59<span
+                        class="text-lg text-dark/60 font-normal">/mo</span></div>
+                <ul class="space-y-4 mb-10 font-medium">
+                    <li><i class="fas fa-check mr-2"></i> Unlimited group classes</li>
+                    <li><i class="fas fa-check mr-2"></i> Monthly trainer 1-on-1</li>
+                    <li><i class="fas fa-check mr-2"></i> Nutrition guide (PDF)</li>
+                    <li><i class="fas fa-check mr-2"></i> Mobile app access</li>
+                </ul>
+                <button onclick="handlePurchase('Elite')"
+                    class="w-full py-4 bg-dark text-white rounded-xl font-heading uppercase tracking-widest hover:opacity-90 transition shadow-xl">
+                    Get Started
+                </button>
+            </div>
+
+            <div class="glass p-10 rounded-[2rem] border-[#00FF88]/20 hover:border-[#00FF88]/30 transition">
+                <h4 class="font-heading text-xl uppercase mb-2">Platinum</h4>
+                <div class="text-5xl font-heading font-bold mb-8">$99<span
+                        class="text-lg text-gray-500 font-normal">/mo</span></div>
+                <ul class="space-y-4 mb-10 text-gray-400">
+                    <li><i class="fas fa-check text-accent mr-2"></i> 24/7 VIP Lounge</li>
+                    <li><i class="fas fa-check text-accent mr-2"></i> Personal training (Weekly)</li>
+                    <li><i class="fas fa-check text-accent mr-2"></i> AI-Powered diet plans</li>
+                </ul>
+                <button onclick="handlePurchase('Platinum')"
+                    class="w-full py-4 border border-white/20 rounded-xl font-heading uppercase tracking-widest bg-[#00ff88] text-dark transition">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="py-24 px-6 md:px-12 bg-dark border-t border-white/5">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-[#00FF88]/20 blur-3xl rounded-full"></div>
+                <img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?q=80&w=800"
+                    class="rounded-[2rem] border border-white/10 grayscale hover:grayscale-0 transition duration-700"
+                    alt="Training Science">
+            </div>
+            <div>
+                <h2 class="text-[#00FF88] font-heading uppercase tracking-widest mb-4">01. The Methodology</h2>
+                <h3 class="text-5xl font-heading font-bold mb-6 italic text-glow-orange">ENGINEERED <br>FOR EVOLUTION
+                </h3>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    At Name Fitness, we don't guess—we measure. Our programs are built on the principles of
+                    <strong>Progressive Overload</strong> and <strong>Metabolic Conditioning</strong>. We leverage the
+                    "Afterburn Effect" (EPOC) to keep your metabolism elevated for up to 36 hours post-workout.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-[#00FF88] p-2 mt-1 rounded-lg text-dark"><i class="fas fa-microscope"></i></div>
+                        <div>
+                            <h4 class="font-bold text-lg text-white">Data-Driven Hypertrophy</h4>
+                            <p class="text-sm text-gray-500">Science-backed rep ranges to maximize muscle fiber
+                                recruitment.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="trainers" class="py-24 px-6 md:px-12 bg-dark reveal">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 text-center md:text-left">
+                <h2 class="text-accent font-heading uppercase tracking-tighter text-lg mb-2">// The Elite Guard</h2>
+                <h3 class="text-4xl md:text-6xl font-heading font-bold uppercase">Master <span
+                        class="italic text-glow">Architects</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="group relative">
+                    <div class="relative overflow-hidden rounded-[2rem] aspect-[4/5] mb-6 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1613685044678-0a9ae422cf5a?q=80&w=1065"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 group-hover:scale-105"
+                            alt="Coach Marcus">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-80">
+                        </div>
+                    </div>
+                    <h4 class="font-heading text-3xl font-bold uppercase italic italic">Marcus "The Tank" Reed</h4>
+                    <p class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Specialty: Hypertrophy &
+                        Powerlifting</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">A former pro bodybuilder with 15 years of
+                        experience in metabolic stress training. Marcus specializes in breaking plateaus and building
+                        raw, functional mass.</p>
+                    <div class="flex gap-4 mt-4 text-gray-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <div class="relative overflow-hidden rounded-[2rem] aspect-[4/5] mb-6 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 group-hover:scale-105"
+                            alt="Coach Sarah">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-80">
+                        </div>
+                    </div>
+                    <h4 class="font-heading text-3xl font-bold uppercase italic">Sarah "Velocity" Chen</h4>
+                    <p class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Specialty: HIIT & Athletic
+                        Performance</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Focuses on explosive movement and cardiovascular
+                        optimization. Sarah’s methodology is designed to incinerate fat while boosting your VO2 max to
+                        elite levels.</p>
+                    <div class="flex gap-4 mt-4 text-gray-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="group relative">
+                    <div class="relative overflow-hidden rounded-[2rem] aspect-[4/5] mb-6 border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700 group-hover:scale-105"
+                            alt="Coach Viktor">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-80">
+                        </div>
+                    </div>
+                    <h4 class="font-heading text-3xl font-bold uppercase italic">Viktor Drago</h4>
+                    <p class="text-accent text-xs uppercase tracking-widest mb-3 font-bold">Specialty: Mobility &
+                        Recovery Science</p>
+                    <p class="text-gray-500 text-sm leading-relaxed">Believes that "longevity is the ultimate gain."
+                        Viktor integrates corrective exercise and advanced yoga to ensure your body performs as good as
+                        it looks.</p>
+                    <div class="flex gap-4 mt-4 text-gray-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-[#111]">
+        <div class="max-w-4xl mx-auto glass p-10 md:p-16 rounded-[3rem] border-[#00FF88]/20 shadow-2xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-heading font-bold uppercase italic">Know Your <span
+                        class="text-[#00FF88]">BMI</span></h2>
+                <p class="text-gray-500">Calculate your Body Mass Index to determine your starting point.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Weight (kg)</label>
+                        <input type="number" id="weight"
+                            class="w-full bg-dark border border-white/10 p-4 rounded-xl focus:border-[#00FF88] outline-none transition"
+                            placeholder="e.g. 75">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-gray-400 mb-2">Height (cm)</label>
+                        <input type="number" id="height"
+                            class="w-full bg-dark border border-white/10 p-4 rounded-xl focus:border-[#00FF88] outline-none transition"
+                            placeholder="e.g. 180">
+                    </div>
+                    <button onclick="calculateBMI()"
+                        class="w-full bg-[#00FF88] text-black py-4 rounded-xl font-heading font-bold uppercase btn-glow-orange">Calculate
+                        Now</button>
+                </div>
+
+                <div class="flex flex-col justify-center items-center bg-dark/50 rounded-2xl p-8 border border-white/5">
+                    <div id="bmi-result" class="text-6xl font-heading font-bold text-[#00FF88] mb-2">0.0</div>
+                    <div id="bmi-status" class="text-gray-500 uppercase tracking-widest text-sm">Enter Details</div>
+                    <p id="bmi-advice" class="text-center text-xs text-gray-600 mt-4 italic">"The numbers don't lie, but
+                        they don't define your limit."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 md:px-12">
+        <div
+            class="bg-gradient-to-r from-[#00FF88] to-[#00FFAE] rounded-[2.5rem] p-12 md:p-20 relative overflow-hidden group">
+            <div class="absolute top-0 right-0 p-10 opacity-10 transform group-hover:rotate-12 transition duration-700">
+                <i class="fas fa-fire text-[15rem] text-red-500"></i>
+            </div>
+            <div class="relative z-10 max-w-2xl">
+                <h2 class="text-dark font-heading text-4xl md:text-6xl font-bold uppercase leading-none mb-6">TODAY'S
+                    <br>BURNOUT CHALLENGE
+                </h2>
+                <p class="text-dark/80 text-lg mb-8 font-medium">100 Burpees + 50 Pull-ups + 2 Mile Run. <br>Tag
+                    @Name Fitness to be featured on the Wall of Fame.</p>
+
+                <button id="challengeBtn"
+                    class="bg-dark text-white px-10 py-4 rounded-full font-heading font-bold uppercase hover:bg-white hover:text-dark transition-all">
+                    ACCEPT CHALLENGE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-accent py-3 overflow-hidden whitespace-nowrap border-y border-dark">
+        <div class="flex animate-marquee font-heading font-bold uppercase text-dark text-sm tracking-tighter">
+            <span class="mx-4"><i class="fas fa-bolt mr-2"></i> NEW RECORD: Marcus P. just cleared 500lbs Squat</span>
+            <span class="mx-4"><i class="fas fa-bolt mr-2"></i> 14 Members currently training</span>
+            <span class="mx-4"><i class="fas fa-bolt mr-2"></i> Only 3 Platinum spots left for March</span>
+            <span class="mx-4"><i class="fas fa-bolt mr-2"></i> Join the 6AM HIIT session tomorrow</span>
+        </div>
+    </div>
+
+
+
+<section id="faq" class="py-24 px-6 md:px-12 bg-dark">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-accent font-heading uppercase tracking-tighter text-lg mb-2">// Intelligence Base</h2>
+                <h3 class="text-4xl md:text-6xl font-heading font-bold uppercase italic">Common <span class="text-white">Queries</span></h3>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/30">
+                    <button class="w-full p-6 text-left flex justify-between items-center group" onclick="toggleFAQ(1)">
+                        <span class="font-heading text-xl uppercase tracking-wide group-hover:text-accent transition-colors">How do I access the Elite Dashboard?</span>
+                        <i id="icon-1" class="fas fa-plus text-accent transition-transform duration-300"></i>
+                    </button>
+                    <div id="ans-1" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="p-6 pt-0 text-gray-400 leading-relaxed border-t border-white/5 mt-4">
+                            Access to the dashboard is reserved for active members. Once you've selected a plan and completed your profile via the "Join Now" page, your biometric credentials will grant you full access to the digital command center.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/30">
+                    <button class="w-full p-6 text-left flex justify-between items-center group" onclick="toggleFAQ(2)">
+                        <span class="font-heading text-xl uppercase tracking-wide group-hover:text-accent transition-colors">Can I switch plans later?</span>
+                        <i id="icon-2" class="fas fa-plus text-accent transition-transform duration-300"></i>
+                    </button>
+                    <div id="ans-2" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="p-6 pt-0 text-gray-400 leading-relaxed border-t border-white/5 mt-4">
+                            Absolutely. You can upgrade from Basic to Elite or Platinum at any time through your dashboard. Downgrades will take effect at the start of your next billing cycle.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/30">
+                    <button class="w-full p-6 text-left flex justify-between items-center group" onclick="toggleFAQ(3)">
+                        <span class="font-heading text-xl uppercase tracking-wide group-hover:text-accent transition-colors">What is the "Afterburn Effect"?</span>
+                        <i id="icon-3" class="fas fa-plus text-accent transition-transform duration-300"></i>
+                    </button>
+                    <div id="ans-3" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="p-6 pt-0 text-gray-400 leading-relaxed border-t border-white/5 mt-4">
+                            Scientifically known as EPOC (Excess Post-exercise Oxygen Consumption), our HIIT mastery programs are designed to keep your metabolism elevated, burning calories for up to 36 hours after your session ends.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 hover:border-accent/30">
+                    <button class="w-full p-6 text-left flex justify-between items-center group" onclick="toggleFAQ(4)">
+                        <span class="font-heading text-xl uppercase tracking-wide group-hover:text-accent transition-colors">Do you offer 1-on-1 coaching?</span>
+                        <i id="icon-4" class="fas fa-plus text-accent transition-transform duration-300"></i>
+                    </button>
+                    <div id="ans-4" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <p class="p-6 pt-0 text-gray-400 leading-relaxed border-t border-white/5 mt-4">
+                            Yes. Elite members receive one monthly 1-on-1 session, while Platinum members receive weekly personal training sessions with our Master Architects to ensure peak performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="testimonials" class="py-24 px-6 md:px-12 bg-[#080808] overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div>
+                    <h2 class="text-accent font-heading uppercase tracking-tighter text-lg mb-2">// The Archive</h2>
+                    <h3 class="text-4xl md:text-6xl font-heading font-bold uppercase italic">Human <span class="text-white">Evolutions</span></h3>
+                </div>
+                <div class="text-gray-500 font-mono text-sm hidden md:block">
+                    [ RECORD_COUNT: 500+ TRANSFORMATIONS ]
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-[2.5rem] border-white/5 relative group hover:border-accent/20 transition-all duration-500">
+                    <div class="absolute -top-4 -right-4 bg-accent text-dark font-heading font-bold px-4 py-1 rounded-full text-xs uppercase italic transform group-hover:rotate-6 transition-transform">
+                        +15lbs Lean Mass
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full border-2 border-accent p-1">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=60&w=200" class="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all" alt="User 01">
+                        </div>
+                        <div>
+                            <h4 class="font-heading text-xl uppercase italic">Alex "Apex" Vance</h4>
+                            <p class="text-accent text-[10px] uppercase tracking-widest">Program: Muscle Gain</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic leading-relaxed mb-6">
+                        "I was stuck in a plateau for years. Marcus 'The Tank' pushed my volume to limits I didn't know existed. The data-driven hypertrophy isn't just a buzzword—it's a roadmap to iron."
+                    </p>
+                    <div class="flex text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="glass p-8 rounded-[2.5rem] border-white/5 relative group hover:border-accent/20 transition-all duration-500">
+                    <div class="absolute -top-4 -right-4 bg-accent text-dark font-heading font-bold px-4 py-1 rounded-full text-xs uppercase italic transform group-hover:rotate-6 transition-transform">
+                        -25% Body Fat
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full border-2 border-accent p-1">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=60&w=200" class="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all" alt="User 02">
+                        </div>
+                        <div>
+                            <h4 class="font-heading text-xl uppercase italic">Elena "Volt" Ross</h4>
+                            <p class="text-accent text-[10px] uppercase tracking-widest">Program: HIIT Mastery</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic leading-relaxed mb-6">
+                        "Sarah’s Velocity sessions are absolute smoke. I didn’t just lose the weight; I gained a level of conditioning that makes daily life feel like it's on easy mode. The afterburn is real."
+                    </p>
+                    <div class="flex text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+
+                <div class="glass p-8 rounded-[2.5rem] border-white/5 relative group hover:border-accent/20 transition-all duration-500">
+                    <div class="absolute -top-4 -right-4 bg-accent text-dark font-heading font-bold px-4 py-1 rounded-full text-xs uppercase italic transform group-hover:rotate-6 transition-transform">
+                        Peak Mobility
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full border-2 border-accent p-1">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=60&w=200" class="w-full h-full object-cover rounded-full grayscale group-hover:grayscale-0 transition-all" alt="User 03">
+                        </div>
+                        <div>
+                            <h4 class="font-heading text-xl uppercase italic">David "Zen" Wu</h4>
+                            <p class="text-accent text-[10px] uppercase tracking-widest">Program: Yoga & Flex</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 italic leading-relaxed mb-6">
+                        "After years of desk work, my back was finished. Viktor didn't just give me stretches; he re-engineered my movement. I'm moving better at 45 than I did at 25."
+                    </p>
+                    <div class="flex text-accent text-xs">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <footer class="bg-black text-gray-400 py-16 px-6 md:px-16 border-t border-[#00FF88]/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+                <div class="lg:col-span-5 flex flex-col justify-between">
+                    <div>
+                        <div class="text-5xl md:text-6xl font-black italic tracking-tighter text-white mb-4">
+                            [NA<span class="text-[#00FF88]">ME]</span><span
+                                class="text-[#00FF88] animate-pulse">_</span>
+                        </div>
+                        <p class="text-lg text-gray-500 italic max-w-sm mb-8">
+                            "Your only limit is you. Push beyond the digital horizon."
+                        </p>
+                    </div>
+
+                    <div class="flex space-x-8 text-2xl">
+                        <a href="#"
+                            class="hover:text-[#00FF88] transition-all duration-300 transform hover:-translate-y-1"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#"
+                            class="hover:text-[#00FF88] transition-all duration-300 transform hover:-translate-y-1"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="hover:text-[#00FF88] transition-all duration-300 transform hover:-translate-y-1"><i
+                                class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div
+                    class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/5 p-8 border-l border-[#00FF88]/30">
+
+                    <div>
+                        <h4 class="text-[#00FF88] uppercase tracking-[0.2em] text-xs font-bold mb-4">Location_HQ</h4>
+                        <address class="not-italic text-sm leading-relaxed text-gray-300">
+                            123 NEON CIRCUIT, SUITE 404<br>
+                            CYBER DISTRICT, NY 10001<br>
+                            
+                        </address>
+                    </div>
+
+                    <div>
+                        <h4 class="text-[#00FF88] uppercase tracking-[0.2em] text-xs font-bold mb-4">System_Uptime</h4>
+                        <ul class="text-sm space-y-2 text-gray-300">
+                            <li class="flex justify-between border-b border-white/5 pb-1"><span>MON - FRI</span>
+                                <span>05:00 - 23:00</span></li>
+                            <li class="flex justify-between border-b border-white/5 pb-1"><span>SAT - SUN</span>
+                                <span>07:00 - 21:00</span></li>
+                            <li class="text-[#00FF88] text-[10px] pt-2 font-mono">24/7 BIOMETRIC ACCESS ENABLED</li>
+                        </ul>
+                    </div>
+
+                    <div class="md:col-span-2 pt-4">
+                        <h4 class="text-[#00FF88] uppercase tracking-[0.2em] text-xs font-bold mb-2">Comms_Link</h4>
+                        <p class="text-xl font-light text-white tracking-tight">
+                            ELITE@Name.FITNESS <span class="text-gray-600 px-2">|</span> (123) 123-4567
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-[10px] tracking-widest text-gray-600 uppercase">
+                    &copy; 2026 [Name] Fitness Elite // Established in the Void.
+                </div>
+                <div class="flex space-x-6 text-[10px] tracking-widest text-gray-600 uppercase">
+                    <p class="hover:text-white">Privacy_Policy</p>
+                    <p class="hover:text-white">Terms_of_Service</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
